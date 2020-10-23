@@ -1,18 +1,19 @@
 import path from "path";
 
 import webpack from "webpack";
-import Dotenv from "dotenv-webpack";
-import merge from "webpack-merge";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import TerserPlugin from "terser-webpack-plugin";
 
-const base: webpack.Configuration = {
+export default (env, argv): webpack.Configuration => ({
+  mode: env.production ? "production" : "development",
   entry: {
     client: "./src/setup/client/index.tsx"
   },
-  plugins: [
-    new Dotenv()
-  ],
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: env.production ? "[name].[contentHash].bundle.js" : "js/[name].js",
+    publicPath: '/',
+  },
+  devtool: env.production ? null : "eval-source-map",
   module: {
     rules: [
       {
@@ -31,9 +32,9 @@ const base: webpack.Configuration = {
         }
       },
       {
-         test: /\.scss$/,
-         exclude: /node_modules/,
-         use: [
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
           "babel-loader",
           {
             loader: require('styled-jsx/webpack').loader,
@@ -41,33 +42,13 @@ const base: webpack.Configuration = {
               type: "scoped"
             }
           }
-         ]
-       }
+        ]
+      }
     ],
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
-      }
-    }
-  },
-};
-
-const devConfig: webpack.Configuration = merge(base, {
-  mode: "development",
-  output: {
-    path: path.join(__dirname, "..", "dist"),
-    filename: "js/[name].js",
-    publicPath: '/',
-  },
-  node: {
-    fs: "empty"
-  },
-  devtool: "source-map",
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       async: false,
@@ -76,21 +57,11 @@ const devConfig: webpack.Configuration = merge(base, {
       }
     }),
   ],
-});
-
-
-const prodConfig: webpack.Configuration = merge(base, {
-  mode: "production",
-  output: {
-    filename: "[name].[contentHash].bundle.js",
-    path: path.resolve(__dirname, "build")
-  },
   optimization: {
-    minimizer: [
-      new TerserPlugin(),
-    ]
-  }
+    splitChunks: {
+      cacheGroups: {
+        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
+      }
+    }
+  },
 });
-
-export default prodConfig;
-export default devConfig;
