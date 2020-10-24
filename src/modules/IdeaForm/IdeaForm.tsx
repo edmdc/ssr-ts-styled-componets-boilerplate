@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Input from '../../ui/input/Input';
 
 export interface Idea {
   title: string
@@ -25,12 +26,17 @@ const IdeaForm = (): JSX.Element => {
 
   return (
     <section>
-      <h2>Hello semi HMR</h2>
       <form>
-        <label htmlFor='title'>Title:</label>
-        <input id='title' value={title} onChange={ event => setTitle(event.target.value) } />
-        <label htmlFor='content'>Content:</label>
-        <input id='content' value={content} onChange={ event => setContent(event.target.value) } />
+        <Input
+          id="title"
+          label="Title from Dyno Component:"
+          value={title} setValue={setTitle}
+        />
+        <Input
+          id='content'
+          label='Content:'
+          value={content} setValue={setContent}
+        />
         <button type='submit' onClick={(event => submitForm(event))}>Submit</button>
       </form>
     </section>
