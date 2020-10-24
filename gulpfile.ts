@@ -4,25 +4,32 @@ import webpack from "webpack";
 import clientConfig from "./webpack.client";
 import serverConfig from "./webpack.server";
 import nodemon from "nodemon";
+import chalk from "chalk";
 
+type Name = "Client" | "Server"
 
-const onBuild = (name: string, done?:any) => {
+const onBuild = (name: Name, done?: any) => {
+  const chalkStyles = {
+    error: chalk.bold.red,
+    stats: chalk.bold.italic.black.bgYellow,
+    msg: name === "Client" ?
+      chalk.bgCyan.black.italic : chalk.bgMagenta.black.italic,
+  }
+
   return (err?: Error, stats?: webpack.Stats) => {
     if (err) {
-      console.error(err.stack || err);
+      console.error(chalkStyles.error(err.stack || err));
       return;
     }
 
     if (stats) {
-      console.log(`${name} - Stats`)
+      console.log(chalkStyles.msg(`${name} - Build Stats`))
       console.log(stats.toString({colors: true}))
     }
 
     if(done) {
       done();
     }
-
-    console.log(`${name} - Build successful!!`)
   }
 }
 
@@ -59,9 +66,8 @@ const run = () => {
     ignore: ['*'],
     watch: ['foo/'],
     ext: 'noop'
-  }).on('restart', function() {
-    console.log('Restarted!');
-  });
+  }).on('restart', () => console.log(chalk.italic.inverse('Restarted!')))
+  .on("quit", () => console.log(chalk.italic.inverse("Server - exited!")) );
 }
 
 exports.build = series(clientBuild, serverBuild);
