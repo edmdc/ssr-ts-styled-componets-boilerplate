@@ -1,7 +1,6 @@
 import express from "express";
 import renderer from "./renderer";
 import dotenv from "dotenv";
-import "../../assets/index";
 
 dotenv.config();
 

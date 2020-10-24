@@ -6,7 +6,7 @@ export interface Idea {
   id: number
 }
 
-const IdeaForm = () => {
+const IdeaForm = (): JSX.Element => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -25,6 +25,7 @@ const IdeaForm = () => {
 
   return (
     <section>
+      <h2>Hello semi HMR</h2>
       <form>
         <label htmlFor='title'>Title:</label>
         <input id='title' value={title} onChange={ event => setTitle(event.target.value) } />

@@ -1,4 +1,3 @@
-import loadUserData from "../../utils/apiCalls";
 import { matchRoutes } from 'react-router-config';
 
 const routes = [
@@ -11,7 +10,6 @@ const routes = [
             },
             {
                 path: "/users",
-                loadData: loadUserData
             }
         ]
     }
@@ -21,7 +19,7 @@ const routes = [
 /*   console.log("something went wrong here") */
 /* } */
 
-export default function getData(path: string) {
+export default function getData(path: string): any {
   const matches = matchRoutes(routes, path);
   return matches
     .filter(m => !!m.route.loadData)

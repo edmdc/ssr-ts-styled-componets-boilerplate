@@ -5,13 +5,14 @@ import webpack from "webpack";
 import {merge} from "webpack-merge";
 import common from "./webpack.common"
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 Dotenv.config();
 
-const devMode = process.env.NODE_ENV === "development";
+const isDevMode = process.env.NODE_ENV !== "production";
 
 const clientConfig: webpack.Configuration = merge(common, {
-  mode: !devMode ? "production" : "development",
+  mode: !isDevMode ? "production" : "development",
   entry: {
     client: {
       import: "./src/setup/client/index.tsx",
@@ -21,7 +22,7 @@ const clientConfig: webpack.Configuration = merge(common, {
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: !devMode ? "js/[name].[contentHash].bundle.js" : "js/[name].js",
+    filename: !isDevMode ? "js/[name].[contentHash].bundle.js" : "js/[name].js",
     publicPath: '/',
   },
   module: {
@@ -30,7 +31,14 @@ const clientConfig: webpack.Configuration = merge(common, {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-          "babel-loader",
+          {
+            loader: "babel-loader",
+            options: {
+              plugins: [
+                isDevMode && require.resolve('react-refresh/babel'),
+              ].filter(Boolean)
+            }
+          },
           {
             loader: require('styled-jsx/webpack').loader,
             options: {
@@ -42,12 +50,14 @@ const clientConfig: webpack.Configuration = merge(common, {
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({
+    isDevMode ? new ForkTsCheckerWebpackPlugin({
       async: false,
       eslint: {
         files: "./src/**/*.{ts,tsx,js,jsx}"
       }
-    }),
+    }) : () => {},
+    isDevMode ? new webpack.HotModuleReplacementPlugin() : () => {},
+    isDevMode ? new ReactRefreshWebpackPlugin() : () => {},
   ],
   // optimization: {
   //   splitChunks: {

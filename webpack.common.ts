@@ -8,7 +8,7 @@ const devMode = process.env.NODE_ENV === "development";
 
 const common: webpack.Configuration = {
   mode: !devMode ? "production" : "development",
-  devtool: !devMode ? null : "eval-source-map",
+  devtool: !devMode ? false : "eval-source-map",
   module: {
     rules: [
       {

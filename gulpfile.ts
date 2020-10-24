@@ -1,55 +1,53 @@
 import path from "path";
-import {parallel} from "gulp";
+import {parallel, series} from "gulp";
 import webpack from "webpack";
 import clientConfig from "./webpack.client";
 import serverConfig from "./webpack.server";
 import nodemon from "nodemon";
 
 
-const onBuild = (done?:any) => {
-  return (err, stats) => {
+const onBuild = (name: string, done?:any) => {
+  return (err?: Error, stats?: webpack.Stats) => {
     if (err) {
       console.error(err.stack || err);
-      if (err.details) {
-        console.error(err.details);
-      }
       return;
     }
 
-    const info = stats.toString({colors: true});
-
-    if (stats.hasErrors()) {
-      console.error(info.errors);
-    }
-
-    if (stats.hasWarnings()) {
-      console.warn(info.warnings);
+    if (stats) {
+      console.log(`${name} - Stats`)
+      console.log(stats.toString({colors: true}))
     }
 
     if(done) {
       done();
     }
+
+    console.log(`${name} - Build successful!!`)
   }
 }
 
-const frontEndWatch = () => {
-  webpack(clientConfig).watch({
+const clientWatch = () => {
+  return webpack(clientConfig).watch({
     aggregateTimeout: 300,
     ignored: /node_modules/
-  }, onBuild())
+  }, onBuild('Client'))
+}
+
+const clientBuild = (done: any) => {
+  return webpack(clientConfig).run(onBuild('Client', done));
+}
+
+const serverBuild = (done: any) => {
+  return webpack(serverConfig).run(onBuild('Server', done));
 }
 
 const serverWatch = () => {
-  webpack(serverConfig).watch({
+  return webpack(serverConfig).watch({
     aggregateTimeout: 300
   }, (err, stats) => {
-    onBuild()(err, stats);
+    onBuild('Server')(err, stats);
     nodemon.restart();
   })
-}
-
-const watch = () => {
-  parallel(frontEndWatch, serverWatch);
 }
 
 const run = () => {
@@ -66,4 +64,5 @@ const run = () => {
   });
 }
 
-exports.run = parallel(watch, run)
+exports.build = series(clientBuild, serverBuild);
+exports.serve = parallel(clientWatch, serverWatch, run);

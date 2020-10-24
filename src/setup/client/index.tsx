@@ -4,7 +4,6 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import getData from "../config/routerConfig";
 import StaticContext from "../config/StaticContext";
-import "../../assets/index";
 
 const path = window.document.location.pathname;
 const promises = getData(path);
