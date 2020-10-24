@@ -2,40 +2,30 @@ import path from "path";
 import Dotenv from "dotenv";
 
 import webpack from "webpack";
+import {merge} from "webpack-merge";
+import common from "./webpack.common"
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 Dotenv.config();
 
 const devMode = process.env.NODE_ENV === "development";
 
-const clientConfig: webpack.Configuration = {
+const clientConfig: webpack.Configuration = merge(common, {
   mode: !devMode ? "production" : "development",
   entry: {
-    client: "./src/setup/client/index.tsx"
+    client: {
+      import: "./src/setup/client/index.tsx",
+      dependOn: 'react-vendors',
+    },
+    'react-vendors': ['react', 'react-dom']
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: !devMode ? "[name].[contentHash].bundle.js" : "js/[name].js",
+    filename: !devMode ? "js/[name].[contentHash].bundle.js" : "js/[name].js",
     publicPath: '/',
   },
-  devtool: !devMode ? null : "eval-source-map",
   module: {
     rules: [
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: "babel-loader",
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name].[ext]",
-            outputPath: "imgs"
-          }
-        }
-      },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
@@ -51,9 +41,6 @@ const clientConfig: webpack.Configuration = {
       }
     ],
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       async: false,
@@ -62,13 +49,13 @@ const clientConfig: webpack.Configuration = {
       }
     }),
   ],
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
-      }
-    }
-  },
-};
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: { test: /[\\/]node_modules[\\/]/, name: 'vendor', chunks: 'all' }
+  //     }
+  //   }
+  // },
+});
 
 export default clientConfig;
