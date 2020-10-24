@@ -67,7 +67,9 @@ const run = () => {
     watch: ['foo/'],
     ext: 'noop'
   }).on('restart', () => console.log(chalk.italic.inverse('Restarted!')))
-  .on("quit", () => console.log(chalk.italic.inverse("Server - exited!")) );
+  .on("quit", () => {
+    console.log(chalk.italic.inverse("Server - exited!"))
+  });
 }
 
 exports.build = series(clientBuild, serverBuild);

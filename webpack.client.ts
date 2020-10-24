@@ -5,7 +5,6 @@ import webpack from "webpack";
 import {merge} from "webpack-merge";
 import common from "./webpack.common"
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 Dotenv.config();
 
@@ -33,11 +32,7 @@ const clientConfig: webpack.Configuration = merge(common, {
         use: [
           {
             loader: "babel-loader",
-            options: {
-              plugins: [
-                isDevMode && require.resolve('react-refresh/babel'),
-              ].filter(Boolean)
-            }
+            options: { }
           },
           {
             loader: require('styled-jsx/webpack').loader,
@@ -56,8 +51,6 @@ const clientConfig: webpack.Configuration = merge(common, {
         files: "./src/**/*.{ts,tsx,js,jsx}"
       }
     }) : () => {},
-    isDevMode ? new webpack.HotModuleReplacementPlugin() : () => {},
-    isDevMode ? new ReactRefreshWebpackPlugin() : () => {},
   ],
   // optimization: {
   //   splitChunks: {

@@ -5,10 +5,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default function loadApp(app: express.Application) {
-  app.use(express.static("dist"));
+  app.use(express.static("build"));
   app.get("/*", function(req, res) {
     const context = {notFound: false};
-    renderer(req.path, context).then(html => {
+    renderer().then(html => {
       if (context.notFound) {
         res.status(404);
       }
