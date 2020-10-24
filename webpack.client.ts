@@ -1,19 +1,24 @@
 import path from "path";
+import Dotenv from "dotenv";
 
 import webpack from "webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
-export default (env, argv): webpack.Configuration => ({
-  mode: env.production ? "production" : "development",
+Dotenv.config();
+
+const devMode = process.env.NODE_ENV === "development";
+
+const clientConfig: webpack.Configuration = {
+  mode: !devMode ? "production" : "development",
   entry: {
     client: "./src/setup/client/index.tsx"
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: env.production ? "[name].[contentHash].bundle.js" : "js/[name].js",
+    filename: !devMode ? "[name].[contentHash].bundle.js" : "js/[name].js",
     publicPath: '/',
   },
-  devtool: env.production ? null : "eval-source-map",
+  devtool: !devMode ? null : "eval-source-map",
   module: {
     rules: [
       {
@@ -64,4 +69,6 @@ export default (env, argv): webpack.Configuration => ({
       }
     }
   },
-});
+};
+
+export default clientConfig;
