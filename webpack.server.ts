@@ -20,15 +20,6 @@ const serverConfig: webpack.Configuration = merge(common, {
     __dirname: false,
   },
   externals: nodeExternals(),
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: "ignore-loader",
-      },
-    ],
-  },
 });
 
 export default serverConfig;

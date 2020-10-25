@@ -3,24 +3,25 @@ import React from "react";
 // import Home from "../../components/Home/Home";
 // import NotFound from "../../components/Common/NotFound";
 import IdeaForm from "../../modules/IdeaForm/IdeaForm";
-import baseStyles from "../../ui/common/base";
+import GlobalStyle from "../../ui/common/globalStyle";
 import { darkTheme } from "../../ui/common/colors";
 
 const App = (): JSX.Element => (
-  <div
-    style={{
-      backgroundColor: `rgba(${darkTheme.bg},1)`,
-      color: `rgba(${darkTheme.textLight},1)`,
-      height: "100vh",
-      overflowY: "hidden",
-    }}
-  >
-    <h1>Hello World</h1>
-    <IdeaForm />
-    <style jsx global>
-      {baseStyles}
-    </style>
-  </div>
+  <React.Fragment>
+    <GlobalStyle />
+
+    <div
+      style={{
+        backgroundColor: `rgba(${darkTheme.bg},1)`,
+        color: `rgba(${darkTheme.textLight},1)`,
+        height: "100vh",
+        overflowY: "hidden",
+      }}
+    >
+      <h1>Hello World</h1>
+      <IdeaForm />
+    </div>
+  </React.Fragment>
 );
 
 export default App;

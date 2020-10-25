@@ -1,19 +1,24 @@
 import React from "react";
-import ReactDOM from "react-dom/server";
+import { renderToString } from "react-dom/server";
+import { ServerStyleSheet } from "styled-components";
 import Helmet from "react-helmet";
-import {flushToHTML} from "styled-jsx/server"
-import App from "../client/App"
-import template from "./template"
+import App from "../client/App";
+import template from "./template";
 
 export default async function renderer() {
-  const htmlBody = ReactDOM.renderToString(<App />);
+  const sheet = new ServerStyleSheet();
+  try {
+    const htmlBody = renderToString(sheet.collectStyles(<App />));
+    const styleTags = sheet.getStyleTags();
 
-  const htmlHead = () => {
-    const {title, meta} = Helmet.renderStatic();
-    return title.toString() + meta.toString();
+    const htmlHead = () => {
+      const { title, meta } = Helmet.renderStatic();
+      return title.toString() + meta.toString();
+    };
+    return template(htmlBody, htmlHead(), styleTags);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    sheet.seal();
   }
-
-  const styles = flushToHTML()
-
-  return template(htmlBody, htmlHead(), styles);
-};
+}

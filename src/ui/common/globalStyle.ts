@@ -1,6 +1,6 @@
-import css from "styled-jsx/css";
+import { createGlobalStyle } from "styled-components";
 
-export default css.global`
+const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
@@ -27,3 +27,5 @@ export default css.global`
     font-family: "Fira Sans", sans-serif;
   }
 `;
+
+export default GlobalStyle;

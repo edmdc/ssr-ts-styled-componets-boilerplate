@@ -26,23 +26,6 @@ const clientConfig: webpack.Configuration = merge(common, {
       : "[ext]/[name].[ext]",
     publicPath: "/",
   },
-  module: {
-    rules: [
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: [
-          "babel-loader",
-          {
-            loader: require("styled-jsx/webpack").loader,
-            options: {
-              type: "scoped",
-            },
-          },
-        ],
-      },
-    ],
-  },
   plugins: [
     isDevMode
       ? new ForkTsCheckerWebpackPlugin({

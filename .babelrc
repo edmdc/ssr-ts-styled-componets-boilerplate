@@ -5,20 +5,7 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    "@babel/plugin-proposal-class-properties", [
-      "styled-jsx/babel",
-      {
-        "plugins": [
-          ["styled-jsx-plugin-sass", {
-            "sassOptions": {
-              "file": "./src/ui/main.scss",
-              "includePaths": ["./src/ui"],
-              "outFile": "./build/css/main.css"
-            }
-            }
-          ]
-        ]
-      }
-    ]
+    "@babel/plugin-proposal-class-properties",
+    "babel-plugin-styled-components"
   ]
 }

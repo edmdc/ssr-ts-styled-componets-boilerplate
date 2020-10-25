@@ -1,5 +1,4 @@
-import css from "styled-jsx/css";
-import React from "react";
+import { css } from "styled-components";
 
 interface options {
   size: string;
@@ -11,12 +10,10 @@ interface options {
   color4: string;
 }
 
-export const beautifyBorder = (
-  options: options
-): { className: string; styles: string } => {
+export const beautifyBorder = (options: options): string => {
   const { size, bg1, bg2, color1, color2, color3, color4 } = options;
 
-  return css.resolve`
+  return css`
     .beautify-border {
       padding: ${size};
       border: ${size} solid transparent;

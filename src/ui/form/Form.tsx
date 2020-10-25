@@ -1,6 +1,5 @@
 import React from "react";
 import { palette } from "../../ui/common/colors";
-import { beautifyBorder } from "../common/mixin";
 
 interface FormProps {
   children: JSX.Element[];
@@ -16,7 +15,6 @@ const Form = (props: FormProps): JSX.Element => {
     color3: palette.gray2,
     color4: palette.gray,
   };
-  const { className, styles } = beautifyBorder(borderOptions);
   return (
     <form
       style={{
@@ -27,10 +25,8 @@ const Form = (props: FormProps): JSX.Element => {
         alignItems: "center",
         color: `rgba(${palette.black},1)`,
       }}
-      className={className}
     >
       {props.children}
-      <style>{styles}</style>
     </form>
   );
 };

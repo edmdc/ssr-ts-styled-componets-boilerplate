@@ -13,7 +13,7 @@ export const palette = {
   aqua2: "#8ec07c",
   orange1: "#d65d0e",
   orange2: "#fe8019",
-  black: "40,40,40",
+  black: "rgba(40,40,40,1)",
   black1: "60,56,54",
   black2: "80,73,69",
   gray: "#928374",
