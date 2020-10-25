@@ -2,4 +2,5 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const {APP_URL} = process.env;
+export const {APP_URL, NODE_ENV, PORT} = process.env;
+

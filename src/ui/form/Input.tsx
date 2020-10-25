@@ -8,10 +8,16 @@ interface InputProps {
 }
 
 const Input = (props: InputProps): JSX.Element => {
-  const { id, label, value, setValue } = props
+  const {id, label, value, setValue} = props
 
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      width: "50%",
+      fontSize: "1.6rem",
+      alignItems: "center"
+    }}>
       <label htmlFor={id}>{label}</label>
       <input id='title'
         value={value}

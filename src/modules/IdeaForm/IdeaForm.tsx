@@ -26,7 +26,13 @@ const IdeaForm = (): JSX.Element => {
 
   return (
     <section>
-      <form>
+    <form style={{
+      display: 'flex',
+      flexFlow: 'column nowrap',
+      width: "50%",
+      margin: "0 auto",
+      alignItems: "center"
+    }}>
         <Input
           id="title"
           label="Title from Dyno Component:"
