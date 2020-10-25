@@ -1,52 +1,46 @@
-import React, {useState} from 'react';
-import Input from '../../ui/input/Input';
+import React, { useState } from "react";
+import Input from "../../ui/form/Input";
+import Form from "../../ui/form/Form";
 
 export interface Idea {
-  title: string
-  content: string
-  id: number
+  title: string;
+  content: string;
+  id: number;
 }
 
 const IdeaForm = (): JSX.Element => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   const clearInputs = () => {
-    setTitle('')
-    setContent('')
-  }
+    setTitle("");
+    setContent("");
+  };
 
-  const submitForm = (event:React.MouseEvent<HTMLElement>) => {
-    event.preventDefault()
-    const newIdea:Idea = {title, content, id: Date.now()}
-    console.log(newIdea)
+  const submitForm = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    const newIdea: Idea = { title, content, id: Date.now() };
+    console.log(newIdea);
     // addIdea(newIdea)
-    clearInputs()
-  }
+    clearInputs();
+  };
 
   return (
     <section>
-    <form style={{
-      display: 'flex',
-      flexFlow: 'column nowrap',
-      width: "50%",
-      margin: "0 auto",
-      alignItems: "center"
-    }}>
+      <Form>
+        <Input id="title" label="Title:" value={title} setValue={setTitle} />
         <Input
-          id="title"
-          label="Title from Dyno Component:"
-          value={title} setValue={setTitle}
+          id="content"
+          label="Content:"
+          value={content}
+          setValue={setContent}
         />
-        <Input
-          id='content'
-          label='Content:'
-          value={content} setValue={setContent}
-        />
-        <button type='submit' onClick={(event => submitForm(event))}>Submit</button>
-      </form>
+        <button type="submit" onClick={(event) => submitForm(event)}>
+          Submit
+        </button>
+      </Form>
     </section>
-  )
-}
+  );
+};
 
 export default IdeaForm;
