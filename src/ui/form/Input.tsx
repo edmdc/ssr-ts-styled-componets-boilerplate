@@ -1,4 +1,5 @@
 import React from "react";
+import { palette } from "../../ui/common/colors";
 
 interface InputProps {
   id: string;
@@ -17,7 +18,8 @@ const Input = (props: InputProps): JSX.Element => {
         flexFlow: "column nowrap",
         width: "50%",
         fontSize: "1.6rem",
-        alignItems: "center",
+        alignItems: "left",
+        margin: "1rem",
       }}
     >
       <label htmlFor={id}>{label}</label>
@@ -25,6 +27,10 @@ const Input = (props: InputProps): JSX.Element => {
         id="title"
         value={value}
         onChange={(event) => setValue(event.target.value)}
+        style={{
+          borderRadius: ".4rem",
+          boxShadow: `0 1rem 2rem rgba(${palette.black1}, .2)`,
+        }}
       />
     </div>
   );

@@ -36,7 +36,7 @@ const IdeaForm = (): JSX.Element => {
           setValue={setContent}
         />
         <button type="submit" onClick={(event) => submitForm(event)}>
-          Submit
+          Make a change
         </button>
       </Form>
     </section>

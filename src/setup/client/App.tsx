@@ -3,14 +3,14 @@ import React from "react";
 // import Home from "../../components/Home/Home";
 // import NotFound from "../../components/Common/NotFound";
 import IdeaForm from "../../modules/IdeaForm/IdeaForm";
-import base from "../../ui/common/base";
+import baseStyles from "../../ui/common/base";
 import { darkTheme } from "../../ui/common/colors";
 
 const App = (): JSX.Element => (
   <div
     style={{
-      backgroundColor: darkTheme.bg,
-      color: darkTheme.textLight,
+      backgroundColor: `rgba(${darkTheme.bg},1)`,
+      color: `rgba(${darkTheme.textLight},1)`,
       height: "100vh",
       overflowY: "hidden",
     }}
@@ -18,7 +18,7 @@ const App = (): JSX.Element => (
     <h1>Hello World</h1>
     <IdeaForm />
     <style jsx global>
-      {base}
+      {baseStyles}
     </style>
   </div>
 );

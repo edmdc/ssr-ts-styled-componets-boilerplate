@@ -2,8 +2,8 @@ import path from "path";
 import Dotenv from "dotenv";
 
 import webpack from "webpack";
-import {merge} from "webpack-merge";
-import common from "./webpack.common"
+import { merge } from "webpack-merge";
+import common from "./webpack.common";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 Dotenv.config();
@@ -15,14 +15,16 @@ const clientConfig: webpack.Configuration = merge(common, {
   entry: {
     client: {
       import: "./src/setup/client/index.tsx",
-      dependOn: 'react-vendors',
+      dependOn: "react-vendors",
     },
-    'react-vendors': ['react', 'react-dom']
+    "react-vendors": ["react", "react-dom"],
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: !isDevMode ? "js/[name].[contentHash].bundle.js" : "js/[name].js",
-    publicPath: '/',
+    filename: !isDevMode
+      ? "[ext]/[name].[contentHash].bundle.[ext]"
+      : "[ext]/[name].[ext]",
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -30,27 +32,26 @@ const clientConfig: webpack.Configuration = merge(common, {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
+          "babel-loader",
           {
-            loader: "babel-loader",
-            options: { }
-          },
-          {
-            loader: require('styled-jsx/webpack').loader,
+            loader: require("styled-jsx/webpack").loader,
             options: {
-              type: "scoped"
-            }
-          }
-        ]
-      }
+              type: "scoped",
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
-    isDevMode ? new ForkTsCheckerWebpackPlugin({
-      async: false,
-      eslint: {
-        files: "./src/**/*.{ts,tsx,js,jsx}"
-      }
-    }) : () => {},
+    isDevMode
+      ? new ForkTsCheckerWebpackPlugin({
+          async: false,
+          eslint: {
+            files: "./src/**/*.{ts,tsx,js,jsx}",
+          },
+        })
+      : () => {},
   ],
   // optimization: {
   //   splitChunks: {
