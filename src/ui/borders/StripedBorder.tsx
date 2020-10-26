@@ -23,27 +23,21 @@ const StripedDiv = styled.div<StripedDivProps>`
   margin: 0 auto;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  padding: ${(props) => props.size};
   border: ${(props) => props.size} solid transparent;
-  border-radius: 0.4rem;
+  border-radius: ${(props) => props.theme.borderRadius};
   box-shadow: 5px 5px 21px black;
-  background: radial-gradient(
-        ${(props) => props.bg} 35%,
-        ${(props) => props.bg2} 85%
-      )
-      padding-box,
-    repeating-linear-gradient(
-        -45deg,
-        ${(props) => props.color1} 0,
-        ${(props) => props.color1} 12.5%,
-        ${(props) => props.color2} 0,
-        ${(props) => props.color2} 25%,
-        ${(props) => props.color3} 0,
-        ${(props) => props.color3} 37.5%,
-        ${(props) => props.color4} 0,
-        ${(props) => props.color4} 50%
-      )
-      0 / 2.1em 2.1em;
+  background: repeating-linear-gradient(
+      -45deg,
+      ${(props) => props.color1} 0,
+      ${(props) => props.color1} 12.5%,
+      ${(props) => props.color2} 0,
+      ${(props) => props.color2} 25%,
+      ${(props) => props.color3} 0,
+      ${(props) => props.color3} 37.5%,
+      ${(props) => props.color4} 0,
+      ${(props) => props.color4} 50%
+    )
+    0 / 2.1em 2.1em;
 `;
 
 export const ThinStripedBox = ({

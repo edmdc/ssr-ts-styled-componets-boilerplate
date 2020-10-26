@@ -21,9 +21,7 @@ const clientConfig: webpack.Configuration = merge(common, {
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: !isDevMode
-      ? "[ext]/[name].[contentHash].bundle.[ext]"
-      : "[ext]/[name].[ext]",
+    filename: !isDevMode ? "js/[name].[contentHash].bundle.js" : "js/[name].js",
     publicPath: "/",
   },
   plugins: [
