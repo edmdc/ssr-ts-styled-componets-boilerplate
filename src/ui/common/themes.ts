@@ -5,7 +5,7 @@ const darkTheme: DefaultTheme = {
   borderRadius: ".5rem",
 
   colors: {
-    main: palette.blue1,
+    main: palette.black1,
     secondary: palette.white1,
     textDark: palette.black1,
     textLight: palette.white,
