@@ -1,20 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { softShadow, darkShadow } from "../common/boxShadows";
 
-const SubmitButton = styled.button`
-  height: 2.4rem;
+interface SubmitButtonProps {
+  text?: string;
+  width?: string;
+}
+
+const SubmitButton = styled.button<SubmitButtonProps>`
+  height: 3.3rem;
+  width: ${(props) => props.width};
   font-size: 1.8rem;
   color: ${(props) => props.theme.colors.textLight};
   background-color: ${(props) => props.theme.colors.main};
-  padding: 0.8rem;
+  border-radius: ${(props) => props.theme.borderRadius};
+  ${softShadow}
+
+  &:hover {
+    transform: translateY(-0.5rem);
+    ${darkShadow}
+  }
 `;
 
-interface SubmitButtonProps {
-  submissionHadler: (event: React.FormEvent<HTMLElement>) => void;
-}
-
-const Submit = (): JSX.Element => {
-  return <SubmitButton type="submit">Submit</SubmitButton>;
+const Submit = ({ text, width }: SubmitButtonProps): JSX.Element => {
+  return (
+    <SubmitButton type="submit" width={width || "40%"}>
+      {text || "Submit"}
+    </SubmitButton>
+  );
 };
 
 export default Submit;
