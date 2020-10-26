@@ -21,7 +21,7 @@ interface BoxProps {
 
 const StripedDiv = styled.div<StripedDivProps>`
   margin: 0 auto;
-  width: ${(props) => props.width};
+  max-width: ${(props) => props.width};
   height: ${(props) => props.height};
   border: ${(props) => props.size} solid transparent;
   border-radius: ${(props) => props.theme.borderRadius};

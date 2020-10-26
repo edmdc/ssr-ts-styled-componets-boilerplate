@@ -29,12 +29,13 @@ const IdeaForm = (): JSX.Element => {
   return (
     <section>
       <Form submissionHadler={submitForm}>
-        <Input id="title" label="Title:" value={title} setValue={setTitle} />
+        <Input id="title" label="Title" value={title} setValue={setTitle} />
         <Input
           id="content"
-          label="Content:"
+          label="Content"
           value={content}
           setValue={setContent}
+          noLabelDisplay
         />
         <Submit />
       </Form>
