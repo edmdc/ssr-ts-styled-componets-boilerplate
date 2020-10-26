@@ -18,7 +18,9 @@ const SubmitButton = styled.button<SubmitButtonProps>`
 
   &:hover {
     transform: translateY(-0.5rem);
-    ${darkShadow}
+    box-shadow: 0 0 0.4rem 0.3rem
+        ${(props) => (props.color ? props.color : props.theme.colors.green)},
+      0.3rem 0.5rem 1.7rem rgba(40, 40, 40, 0.7);
   }
 `;
 

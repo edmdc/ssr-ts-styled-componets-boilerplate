@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     overflow-y: hidden;
     font-family: "Ubuntu", sans-serif;
+    background-color: ${(props) => props.theme.colors.main};
+    color: ${(props) => props.theme.colors.textLight};
+    height: 100vh;
+    overflow-y: hidden;
   }
 
   h1,

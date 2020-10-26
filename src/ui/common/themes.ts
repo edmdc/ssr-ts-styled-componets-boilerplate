@@ -3,6 +3,7 @@ import { palette } from "../common/colors";
 
 const darkTheme: DefaultTheme = {
   borderRadius: ".5rem",
+  gutterHorizontal: ".6rem",
 
   colors: {
     main: palette.black1,
