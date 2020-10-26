@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../ui/form/Input";
 import Form from "../../ui/form/Form";
+import Submit from "../../ui/buttons/Submit";
 
 export interface Idea {
   title: string;
@@ -17,7 +18,7 @@ const IdeaForm = (): JSX.Element => {
     setContent("");
   };
 
-  const submitForm = (event: React.MouseEvent<HTMLElement>) => {
+  const submitForm = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     const newIdea: Idea = { title, content, id: Date.now() };
     console.log(newIdea);
@@ -27,7 +28,7 @@ const IdeaForm = (): JSX.Element => {
 
   return (
     <section>
-      <Form>
+      <Form submissionHadler={submitForm}>
         <Input id="title" label="Title:" value={title} setValue={setTitle} />
         <Input
           id="content"
@@ -35,9 +36,7 @@ const IdeaForm = (): JSX.Element => {
           value={content}
           setValue={setContent}
         />
-        <button type="submit" onClick={(event) => submitForm(event)}>
-          Make a change
-        </button>
+        <Submit />
       </Form>
     </section>
   );

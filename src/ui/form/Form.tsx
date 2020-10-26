@@ -4,6 +4,7 @@ import { ThinStripedBox } from "../borders/StripedBorder";
 
 interface FormProps {
   children: JSX.Element[];
+  submissionHadler: (event: React.FormEvent<HTMLElement>) => void;
 }
 
 const StyledForm = styled.form`
@@ -22,7 +23,9 @@ const StyledForm = styled.form`
 const Form = (props: FormProps): JSX.Element => {
   return (
     <ThinStripedBox width="45rem" height="25rem">
-      <StyledForm>{props.children}</StyledForm>
+      <StyledForm onSubmit={(event) => props.submissionHadler(event)}>
+        {props.children}
+      </StyledForm>
     </ThinStripedBox>
   );
 };
