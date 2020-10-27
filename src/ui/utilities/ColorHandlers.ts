@@ -1,4 +1,4 @@
-import { DefaultTheme, ColorPalette } from "styled-components";
+import { DefaultTheme, ColorPalette, ColorChoices } from "styled-components";
 
 export const getModeColors = (
   theme: DefaultTheme,
@@ -13,4 +13,9 @@ export const getModeColors = (
     case "light":
       return invert ? dark : light;
   }
+};
+
+export const getColor = (theme: DefaultTheme, color: ColorChoices): string => {
+  const palette = getModeColors(theme);
+  return palette[color];
 };
