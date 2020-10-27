@@ -3,11 +3,18 @@ import { clearfix } from "../common/mixin";
 
 interface RowProps {
   maxWidth?: string;
+  height?: string;
 }
 
-const Cell = styled.div`
-  background-color: black;
-  height: 2rem;
+// prettier-ignore
+const Cell = styled.div<RowProps>`
+  background-image: linear-gradient(to right bottom,
+    #efefef,
+    ${(props) => props.theme.colors.secondary}
+  );
+  text-align: center;
+  border-radius: ${(props) => props.theme.borderRadius};
+  height: ${(props) => props.height || "6.6rem"};
 `;
 
 export const HalfCell = styled(Cell)``;
@@ -20,10 +27,13 @@ export const ThreeFourthCell = styled(Cell)``;
 export const Row = styled.div<RowProps>`
   max-width: ${(props) => (props.maxWidth ? props.maxWidth : "60rem")};
   margin: 0 auto;
-  background-color: white;
 
   &:not(:last-child) {
-    margin-bottom: 0.8rem;
+    margin-bottom: ${(props) => props.theme.gridGap};
+  }
+
+  &:first-child {
+    margin-top: 3rem;
   }
 
   ${clearfix}
@@ -32,39 +42,40 @@ export const Row = styled.div<RowProps>`
     float: left;
 
     &:not(:last-child) {
-      margin-right: ${(props) => props.theme.gutterHorizontal};
+      margin-right: ${(props) => props.theme.gridGap};
     }
   }
 
   ${HalfCell} {
-    width: calc((100% - ${(props) => props.theme.gutterHorizontal}) / 2);
+    width: calc((100% - ${(props) => props.theme.gridGap}) / 2);
   }
 
   ${ThirdCell} {
-    width: calc((100% - 2 * ${(props) => props.theme.gutterHorizontal}) / 3);
+    width: calc((100% - 2 * ${(props) => props.theme.gridGap}) / 3);
   }
 
   ${TwoThirdCell} {
     width: calc(
-      2 * ((100% - 2 * ${(props) => props.theme.gutterHorizontal}) / 3) +
-        ${(props) => props.theme.gutterHorizontal}
+      2 * ((100% - 2 * ${(props) => props.theme.gridGap}) / 3) +
+        ${(props) => props.theme.gridGap}
     );
   }
 
   ${FourthCell} {
-    width: calc((100% - 3 * ${(props) => props.theme.gutterHorizontal}) / 4);
+    width: calc((100% - 3 * ${(props) => props.theme.gridGap}) / 4);
   }
 
   ${TwoFourthCell} {
     width: calc(
-      2 * ((100% - 3 * ${(props) => props.theme.gutterHorizontal}) / 4) + #${(props) => props.theme.gutterHorizontal}
+      2 * ((100% - 3 * ${(props) => props.theme.gridGap}) / 4) +
+        ${(props) => props.theme.gridGap}
     );
   }
 
   ${ThreeFourthCell} {
     width: calc(
-      3 * ((100% - 3 * ${(props) => props.theme.gutterHorizontal}) / 4) +
-        (2 * ${(props) => props.theme.gutterHorizontal})
+      3 * ((100% - 3 * ${(props) => props.theme.gridGap}) / 4) +
+        (2 * ${(props) => props.theme.gridGap})
     );
   }
 `;

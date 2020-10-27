@@ -4,11 +4,17 @@ import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
     borderRadius: string;
-    gutterHorizontal: string;
+    gridGap: string;
+    fonts: {
+      body: string;
+      headers: string;
+    };
 
     colors: {
       main: string;
+      mainAccent: string;
       secondary: string;
+      secondaryAccent: string;
       textDark: string;
       textLight: string;
       black: string;
