@@ -1,13 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { ThinStripedBox } from "../borders/StripedBorder";
+import { useStripedBorder, foregroundGradient } from "../common/mixin";
+import { getModeColors } from "../utilities/getModeColors";
 
 interface FormProps {
   children: JSX.Element[];
-  submissionHadler: (event: React.FormEvent<HTMLElement>) => void;
+  submissionHandler: (e: React.FormEvent<HTMLElement>) => void;
+  useStripedBorder: boolean;
 }
 
-const StyledForm = styled.form`
+const Form: React.FC<FormProps> = ({ children, submissionHandler }) => (
+  <form onSubmit={(event) => submissionHandler(event)}>{children}</form>
+);
+
+export const StyledForm = styled(Form).attrs((props) => ({
+  colors: () => getModeColors(props.theme),
+}))`
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
@@ -16,18 +24,7 @@ const StyledForm = styled.form`
   height: 100%;
   border: 0.4rem solid transparent;
   border-radius: ${(props) => props.theme.borderRadius};
-  color: ${(props) => props.theme.colors.textDark};
-  background: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.text.dark};
+  ${(props) => (props.useStripedBorder ? useStripedBorder : foregroundGradient)}
 `;
 
-const Form = (props: FormProps): JSX.Element => {
-  return (
-    <ThinStripedBox width="45rem" height="25rem">
-      <StyledForm onSubmit={(event) => props.submissionHadler(event)}>
-        {props.children}
-      </StyledForm>
-    </ThinStripedBox>
-  );
-};
-
-export default Form;
