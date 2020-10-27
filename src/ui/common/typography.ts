@@ -9,11 +9,13 @@ interface HeaderProps {
 
 const baseStyles = css<HeaderProps>`
   color: ${(props) =>
-    props.light ? props.theme.colors.textLight : props.theme.colors.textDark};
+    props.light ? props.theme.colors.text.light : props.theme.colors.text.dark};
   font-style: ${(props) => (props.italic ? "italic" : "normal")};
   font-weight: ${(props) => (props.thin ? "400" : "700")};
   font-family: ${(props) =>
-    props.useBodyText ? props.theme.fonts.body : props.theme.fonts.headers};
+    props.useBodyText
+      ? props.theme.fonts.body.familyName
+      : props.theme.fonts.headers.familyName};
   padding: 0.3rem;
   margin: 0.5rem auto;
 `;

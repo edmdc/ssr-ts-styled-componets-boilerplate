@@ -71,4 +71,3 @@ export const Input = styled(inputBase).attrs((props) => ({
     font-size: 1.8rem;
   }
 `;
-

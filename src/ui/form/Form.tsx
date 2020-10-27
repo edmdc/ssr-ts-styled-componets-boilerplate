@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useStripedBorder, foregroundGradient } from "../common/mixin";
-import { getModeColors } from "../utilities/getModeColors";
+import { getModeColors } from "../utilities/ColorHandlers";
 
 interface FormProps {
   children: JSX.Element[];
@@ -27,4 +27,3 @@ export const StyledForm = styled(Form).attrs((props) => ({
   color: ${(props) => props.theme.colors.text.dark};
   ${(props) => (props.useStripedBorder ? useStripedBorder : foregroundGradient)}
 `;
-
