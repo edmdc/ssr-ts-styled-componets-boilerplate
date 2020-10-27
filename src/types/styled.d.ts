@@ -9,13 +9,16 @@ declare module "styled-components" {
     secondaryAccent: string;
     textDark: string;
     textLight: string;
+    aqua: string;
     black: string;
     blue: string;
+    darkGray: string;
     gray: string;
     green: string;
     orange: string;
     purple: string;
     red: string;
+    yellow: string;
     white: string;
   }
 
@@ -33,6 +36,10 @@ declare module "styled-components" {
     };
 
     colors: {
+      text: {
+        dark: string;
+        light: string;
+      };
       dark: ColorPalette;
       light: ColorPalette;
     };
