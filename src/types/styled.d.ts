@@ -2,18 +2,13 @@ import "styled-components";
 
 // extend og module declarations
 declare module "styled-components" {
-  export type ColorChoices =
-    | "aqua"
-    | "black"
-    | "blue"
-    | "darkGray"
-    | "gray"
-    | "green"
-    | "orange"
-    | "purple"
-    | "red"
-    | "yellow"
-    | "white";
+  type ColorProps = {
+    colors: ColorPalette;
+    color1?: string;
+    color2?: string;
+    color3?: string;
+    color4?: string;
+  };
 
   export interface ColorPalette {
     background: string;
@@ -31,6 +26,10 @@ declare module "styled-components" {
     red: string;
     yellow: string;
     white: string;
+    text: {
+      dark: string;
+      light: string;
+    };
   }
 
   interface Font {
@@ -46,16 +45,8 @@ declare module "styled-components" {
       body: Font;
       headers: Font;
     };
+    onFocusHighlight: string;
 
-    colors: {
-      mode: "dark" | "light";
-      onFocusHighlight: ColorChoices;
-      text: {
-        dark: string;
-        light: string;
-      };
-      dark: ColorPalette;
-      light: ColorPalette;
-    };
+    colors: ColorPalette;
   }
 }

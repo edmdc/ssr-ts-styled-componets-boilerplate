@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { getModeColors, getDefaultTextColor } from "../utilities/ColorHandlers";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -16,8 +15,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     overflow-y: hidden;
     font-family: "Ubuntu", sans-serif;
-    background-color: ${(props) => getModeColors(props.theme).background};
-    color: ${(props) => getDefaultTextColor(props.theme)};
+    background-color: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text.dark};
     height: 100vh;
     overflow-y: scroll;
   }

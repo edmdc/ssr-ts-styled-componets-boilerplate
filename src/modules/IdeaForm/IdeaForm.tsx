@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "../../ui/form/Input";
 import Form from "../../ui/form/Form";
 import Submit from "../../ui/buttons/Submit";
+import { BaseDiv } from "../../ui/borders/StripedBorder";
 
 export interface Idea {
   title: string;
@@ -27,19 +28,24 @@ const IdeaForm = (): JSX.Element => {
   };
 
   return (
-    <section>
-      <Form submissionHadler={submitForm}>
-        <Input id="title" label="Title" value={title} setValue={setTitle} />
+    <BaseDiv borderStyle="striped">
+      <Form onSubmit={(e) => submitForm(e)}>
+        <Input
+          id="title"
+          label="Title"
+          value={title}
+          changeHandler={setTitle}
+        />
         <Input
           id="content"
           label="Content"
           value={content}
-          setValue={setContent}
+          changeHandler={setContent}
           noLabelDisplay
         />
-        <Submit />
+        <Submit>Submit</Submit>
       </Form>
-    </section>
+    </BaseDiv>
   );
 };
 

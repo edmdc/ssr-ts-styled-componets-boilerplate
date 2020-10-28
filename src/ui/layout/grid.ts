@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { clearfix } from "../common/mixin";
+import { BaseDiv } from "../borders/StripedBorder";
 
 interface RowProps {
   maxWidth?: string;
   height?: string;
 }
 
-// prettier-ignore
-const Cell = styled.div<RowProps>`
+const Cell = styled(BaseDiv)<RowProps>`
   text-align: center;
   border-radius: ${(props) => props.theme.borderRadius};
   height: ${(props) => props.height || "6.6rem"};

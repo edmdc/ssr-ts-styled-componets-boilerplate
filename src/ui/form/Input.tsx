@@ -1,15 +1,12 @@
 import React from "react";
-import styled, { ColorChoices, ColorPalette } from "styled-components";
+import styled from "styled-components";
 import { thinShadow } from "../common/boxShadows";
-import { getColor, getModeColors } from "../utilities/ColorHandlers";
 
 interface InputProps {
   id: string;
   label: string;
   value: string;
   changeHandler: React.Dispatch<React.SetStateAction<string>>;
-  colors: ColorPalette;
-  onFocusHighlight?: ColorChoices;
   noLabelDisplay?: boolean;
   className?: string;
 }
@@ -31,12 +28,7 @@ const inputBase: React.FC<InputProps> = (props) => {
   );
 };
 
-const Input = styled(inputBase).attrs((props) => ({
-  colors: () => getModeColors(props.theme),
-  onFocusHighlight: props.onFocusHighlight
-    ? getColor(props.theme, props.onFocusHighlight)
-    : getColor(props.theme, "gray"),
-}))`
+const Input = styled(inputBase)`
   display: flex;
   flex-flow: column nowrap;
   width: 65%;
@@ -52,11 +44,11 @@ const Input = styled(inputBase).attrs((props) => ({
     font-size: ${(props) => (props.noLabelDisplay ? "2.1rem" : "1.8rem")};
     font-family: "Ubuntu", sans-serif;
     font-weight: 200;
-    border: 0.2rem solid ${(props) => props.colors.black};
+    border: 0.2rem solid ${(props) => props.theme.colors.black};
     ${thinShadow}
 
     &:focus {
-      box-shadow: 0 0 0.5rem 0.3rem ${(props) => props.highlightColor};
+      box-shadow: 0 0 0.5rem 0.3rem ${(props) => props.theme.onFocusHighlight};
     }
   }
 

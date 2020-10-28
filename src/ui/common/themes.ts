@@ -1,25 +1,28 @@
 import { DefaultTheme } from "styled-components";
 
-const gruvBox: DefaultTheme = {
-  borderRadius: ".5rem",
-  borderSize: ".8rem",
-  gridGap: "1.6rem",
-  fonts: {
-    body: {
-      familyName: "'Ubuntu', sans-serif",
-      url:
-        "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap",
-    },
-    headers: {
-      url:
-        "https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
-      familyName: "'Fira Sans', sans-serif",
-    },
-  },
+type Mode = "dark" | "light";
 
-  colors: {
+const getGruvBoxTheme = (mode: Mode): DefaultTheme => {
+  const baseTheme = {
+    borderRadius: ".5rem",
+    borderSize: ".8rem",
+    gridGap: "1.6rem",
+    fonts: {
+      body: {
+        familyName: "'Ubuntu', sans-serif",
+        url:
+          "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap",
+      },
+      headers: {
+        url:
+          "https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+        familyName: "'Fira Sans', sans-serif",
+      },
+    },
     onFocusHighlight: "gray",
-    mode: "dark",
+  };
+
+  const colors = {
     text: {
       dark: "rgba(60,56,54,1)",
       light: "rgba(251,241,199,1)",
@@ -58,7 +61,9 @@ const gruvBox: DefaultTheme = {
       yellow: "rgba(215, 153, 33, 1)",
       white: "rgba(245,245,245,1)",
     },
-  },
+  };
+
+  return { ...baseTheme, colors: { ...colors[mode], text: colors.text } };
 };
 
-export { gruvBox };
+export { getGruvBoxTheme };
