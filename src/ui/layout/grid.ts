@@ -8,10 +8,6 @@ interface RowProps {
 
 // prettier-ignore
 const Cell = styled.div<RowProps>`
-  background-image: linear-gradient(to right bottom,
-    #efefef,
-    ${(props) => props.theme.colors.secondary}
-  );
   text-align: center;
   border-radius: ${(props) => props.theme.borderRadius};
   height: ${(props) => props.height || "6.6rem"};

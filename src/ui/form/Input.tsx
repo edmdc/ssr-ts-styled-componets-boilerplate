@@ -1,9 +1,5 @@
 import React from "react";
-import styled, {
-  ColorChoices,
-  ColorPalette,
-  DefaultTheme,
-} from "styled-components";
+import styled, { ColorChoices, ColorPalette } from "styled-components";
 import { thinShadow } from "../common/boxShadows";
 import { getColor, getModeColors } from "../utilities/ColorHandlers";
 
@@ -13,13 +9,12 @@ interface InputProps {
   value: string;
   changeHandler: React.Dispatch<React.SetStateAction<string>>;
   colors: ColorPalette;
-  theme: DefaultTheme;
+  onFocusHighlight?: ColorChoices;
   noLabelDisplay?: boolean;
-  onFocusShadowColor?: ColorChoices;
   className?: string;
 }
 
-const inputBase = (props: InputProps): JSX.Element => {
+const inputBase: React.FC<InputProps> = (props) => {
   const { id, label, value, changeHandler, className, noLabelDisplay } = props;
 
   return (
@@ -36,10 +31,10 @@ const inputBase = (props: InputProps): JSX.Element => {
   );
 };
 
-export const Input = styled(inputBase).attrs((props) => ({
-  colors: getModeColors(props.theme),
-  onFocusShadowColor: props.onFocusShadowColor
-    ? getColor(props.theme, props.onFocusShadowColor)
+const Input = styled(inputBase).attrs((props) => ({
+  colors: () => getModeColors(props.theme),
+  onFocusHighlight: props.onFocusHighlight
+    ? getColor(props.theme, props.onFocusHighlight)
     : getColor(props.theme, "gray"),
 }))`
   display: flex;
@@ -61,7 +56,7 @@ export const Input = styled(inputBase).attrs((props) => ({
     ${thinShadow}
 
     &:focus {
-      box-shadow: 0 0 0.5rem 0.3rem ${(props) => props.onFocusShadowColor};
+      box-shadow: 0 0 0.5rem 0.3rem ${(props) => props.highlightColor};
     }
   }
 
@@ -71,3 +66,5 @@ export const Input = styled(inputBase).attrs((props) => ({
     font-size: 1.8rem;
   }
 `;
+
+export default Input;

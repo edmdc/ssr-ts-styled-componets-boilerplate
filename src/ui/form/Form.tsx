@@ -6,14 +6,14 @@ import { getModeColors } from "../utilities/ColorHandlers";
 interface FormProps {
   children: JSX.Element[];
   submissionHandler: (e: React.FormEvent<HTMLElement>) => void;
-  useStripedBorder: boolean;
+  useStripedBorder?: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ children, submissionHandler }) => (
+const baseForm: React.FC<FormProps> = ({ children, submissionHandler }) => (
   <form onSubmit={(event) => submissionHandler(event)}>{children}</form>
 );
 
-export const StyledForm = styled(Form).attrs((props) => ({
+const Form = styled(baseForm).attrs((props) => ({
   colors: () => getModeColors(props.theme),
 }))`
   display: flex;
@@ -27,3 +27,5 @@ export const StyledForm = styled(Form).attrs((props) => ({
   color: ${(props) => props.theme.colors.text.dark};
   ${(props) => (props.useStripedBorder ? useStripedBorder : foregroundGradient)}
 `;
+
+export default Form;

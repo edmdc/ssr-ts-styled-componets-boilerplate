@@ -1,8 +1,8 @@
 import { DefaultTheme } from "styled-components";
-import { palette } from "../common/colors";
 
 const gruvBox: DefaultTheme = {
   borderRadius: ".5rem",
+  borderSize: ".8rem",
   gridGap: "1.6rem",
   fonts: {
     body: {
@@ -18,15 +18,17 @@ const gruvBox: DefaultTheme = {
   },
 
   colors: {
+    onFocusHighlight: "gray",
+    mode: "dark",
     text: {
       dark: "rgba(60,56,54,1)",
       light: "rgba(251,241,199,1)",
     },
     dark: {
-      main: "rgba(60,56,54,1)",
-      mainAccent: "rgba(80,73,69,1)",
-      secondary: "rgba(235,219,178,1)",
-      secondaryAccent: "rgba(251,241,199,1)",
+      background: "rgba(60,56,54,1)",
+      backgroundAccent: "rgba(80,73,69,1)",
+      foreground: "rgba(235,219,178,1)",
+      foregroundAccent: "rgba(251,241,199,1)",
       aqua: "rgba(142,192,124,1)",
       black: "rgba(40,40,40,1)",
       blue: "rgba(131,165,152,1)",
@@ -40,10 +42,10 @@ const gruvBox: DefaultTheme = {
       white: "rgba(245,245,245,1)",
     },
     light: {
-      main: "rgba(235,219,178,1)",
-      mainAccent: "rgba(251,241,199,1)",
-      secondary: "rgba(60,56,54,1)",
-      secondaryAccent: "rgba(80,73,69,1)",
+      background: "rgba(235,219,178,1)",
+      backgroundAccent: "rgba(251,241,199,1)",
+      foreground: "rgba(60,56,54,1)",
+      foregroundAccent: "rgba(80,73,69,1)",
       aqua: "rgba(104,157,106,1)",
       black: "rgba(60,56,54,1)",
       blue: "rgba(69,133,136,1)",

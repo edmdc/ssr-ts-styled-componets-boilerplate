@@ -2,13 +2,24 @@ import "styled-components";
 
 // extend og module declarations
 declare module "styled-components" {
-  interface ColorPalette {
-    main: string;
-    mainAccent: string;
-    secondary: string;
-    secondaryAccent: string;
-    textDark: string;
-    textLight: string;
+  export type ColorChoices =
+    | "aqua"
+    | "black"
+    | "blue"
+    | "darkGray"
+    | "gray"
+    | "green"
+    | "orange"
+    | "purple"
+    | "red"
+    | "yellow"
+    | "white";
+
+  export interface ColorPalette {
+    background: string;
+    backgroundAccent: string;
+    foreground: string;
+    foregroundAccent: string;
     aqua: string;
     black: string;
     blue: string;
@@ -29,6 +40,7 @@ declare module "styled-components" {
 
   export interface DefaultTheme {
     borderRadius: string;
+    borderSize: string;
     gridGap: string;
     fonts: {
       body: Font;
@@ -36,6 +48,8 @@ declare module "styled-components" {
     };
 
     colors: {
+      mode: "dark" | "light";
+      onFocusHighlight: ColorChoices;
       text: {
         dark: string;
         light: string;
